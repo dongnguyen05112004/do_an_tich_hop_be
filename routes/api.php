@@ -1,18 +1,32 @@
 <?php
 
 use App\Http\Controllers\BaoCaoController;
+use App\Http\Controllers\chitieuController;
+use App\Http\Controllers\chitieugiadinhController;
+use App\Http\Controllers\NganSachController;
+use App\Http\Controllers\NganSachgiadinhController;
 use App\Http\Controllers\NoController;
-
+use App\Http\Controllers\nogiadinhController;
 use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\thunhapController;
+use App\Http\Controllers\thunhapgiadinhController;
 use App\Http\Controllers\TietKiemController;
+use App\Http\Controllers\tietkiemgiadinhController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+//ca nhan
+
 //thu nhap
 Route::get('/canhan/thunhap/data', [thunhapController::class, 'getThuNhap']);
 Route::post('/canhan/thunhap/them', [thunhapController::class, 'themThuNhap']);
 Route::post('/canhan/thunhap/sua', [thunhapController::class, 'suaThuNhap']);
 Route::post('/canhan/thunhap/xoa', [thunhapController::class, 'xoaThuNhap']);
+//chi tieu
+Route::get('/canhan/chitieu/data', [chitieuController::class, 'getChiTieu']);
+Route::post('/canhan/chitieu/them', [chitieuController::class, 'themChiTieu']);
+Route::post('/canhan/chitieu/sua', [chitieuController::class, 'suaChiTieu']);
+Route::post('/canhan/chitieu/xoa', [chitieuController::class, 'xoaChiTieu']);
 //no
 Route::get('/canhan/no/data', [NoController::class, 'getNo']);
 Route::post('/canhan/no/them', [NoController::class, 'themNo']);
@@ -23,10 +37,15 @@ Route::get('/canhan/tietkiem/data', [TietKiemController::class, 'getdata']);
 Route::post('/canhan/tietkiem/them', [TietKiemController::class, 'themTietKiem']);
 Route::post('/canhan/tietkiem/sua', [TietKiemController::class, 'suaTietKiem']);
 Route::post('/canhan/tietkiem/xoa', [TietKiemController::class, 'xoaTietKiem']);
+//ngan sach
+Route::get('/canhan/ngansach/data', [NganSachController::class, 'getdata']);
+Route::post('/canhan/ngansach/them', [NganSachController::class, 'themNganSach']);
+Route::post('/canhan/ngansach/sua', [NganSachController::class, 'suaNganSach']);
+Route::post('/canhan/ngansach/xoa', [NganSachController::class, 'xoaNganSach']);
 // Khach hang
 Route::post('/khach-hang/dang-nhap', [TaiKhoanController::class, 'DangNhap']);
 Route::get('/khach-hang/get-data', [TaiKhoanController::class, 'getdata']);
-Route::post('/khach-hang/sua-profile', [TaiKhoanController::class, 'suaprofile']); 
+Route::post('/khach-hang/sua-profile', [TaiKhoanController::class, 'suaprofile']);
 Route::post('/khach-hang/doi-password', [TaiKhoanController::class, 'doipassword']);
 Route::post('/dang-ky', [TaiKhoanController::class, 'Dangky']);
 
@@ -34,4 +53,31 @@ Route::post('/dang-ky', [TaiKhoanController::class, 'Dangky']);
 //baocao
 Route::get('/canhan/baocao', [BaoCaoController::class, 'getBaoCao']);
 
+
+//gia dinh
+//thu nhap
+Route::get('/giadinh/thunhap/data', [thunhapgiadinhController::class, 'getThuNhap']);
+Route::post('/giadinh/thunhap/them', [thunhapgiadinhController::class, 'themThuNhap']);
+Route::post('/giadinh/thunhap/sua', [thunhapgiadinhController::class, 'suaThuNhap']);
+Route::post('/giadinh/thunhap/xoa', [thunhapgiadinhController::class, 'xoaThuNhap']);
+//chi tieu
+Route::get('/giadinh/chitieu/data', [chitieugiadinhController::class, 'getChiTieu']);
+Route::post('/giadinh/chitieu/them', [chitieugiadinhController::class, 'themChiTieu']);
+Route::post('/giadinh/chitieu/sua', [chitieugiadinhController::class, 'suaChiTieu']);
+Route::post('/giadinh/chitieu/xoa', [chitieugiadinhController::class, 'xoaChiTieu']);
+//no
+Route::get('/giadinh/no/data', [nogiadinhController::class, 'getNo']);
+Route::post('/giadinh/no/them', [nogiadinhController::class, 'themNo']);
+Route::post('/giadinh/no/sua', [nogiadinhController::class, 'suaNo']);
+Route::post('/giadinh/no/xoa', [nogiadinhController::class, 'xoaNo']);
+//tiet kiem
+Route::get('/giadinh/tietkiem/data', [tietkiemgiadinhController::class, 'getdata']);
+Route::post('/giadinh/tietkiem/them', [tietkiemgiadinhController::class, 'themTietKiem']);
+Route::post('/giadinh/tietkiem/sua', [tietkiemgiadinhController::class, 'suaTietKiem']);
+Route::post('/giadinh/tietkiem/xoa', [tietkiemgiadinhController::class, 'xoaTietKiem']);
+//ngan sach
+Route::get('/giadinh/ngansach/data', [NganSachgiadinhController::class, 'getdata']);
+Route::post('/giadinh/ngansach/them', [NganSachgiadinhController::class, 'themNganSach']);
+Route::post('/giadinh/ngansach/sua', [NganSachgiadinhController::class, 'suaNganSach']);
+Route::post('/giadinh/ngansach/xoa', [NganSachgiadinhController::class, 'xoaNganSach']);
 
