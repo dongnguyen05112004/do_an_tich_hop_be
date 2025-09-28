@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('nos', function (Blueprint $table) {
             $table->id();
-            $table->string('ma_no')->unique();
             $table->string('ten_no');
-            $table->date('ngay_bat_dau');
-            $table->date('ngay_ket_thuc');
-            $table->bigInteger('so_tien');
+            $table->string('ma_tai_khoan');
+            $table->string('ma_TVGD');
+            $table->decimal('tien_no_goc');
+            $table->decimal('du_no');
+            $table->date('ngay_vay');
+            $table->date('ky_han');
             $table->decimal('lai_suat');
+            $table->string('ghi_chu')->nullable();
+            $table->string('ma_loai_no');
             $table->timestamps();
         });
     }

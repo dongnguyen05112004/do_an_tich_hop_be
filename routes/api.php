@@ -33,8 +33,9 @@ Route::post('/canhan/no/them', [NoController::class, 'themNo']);
 Route::post('/canhan/no/sua', [NoController::class, 'suaNo']);
 Route::post('/canhan/no/xoa', [NoController::class, 'xoaNo']);
 //tiet kiem
+Route::get('/tietkiem/check-login' , [TietKiemController::class, 'checkLogin']);
 Route::get('/canhan/tietkiem/data', [TietKiemController::class, 'getdata']);
-Route::post('/canhan/tietkiem/them', [TietKiemController::class, 'themTietKiem']);
+Route::post('/canhan/tietkiem/them', [TietKiemController::class, 'themTietKiem'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 Route::post('/canhan/tietkiem/sua', [TietKiemController::class, 'suaTietKiem']);
 Route::post('/canhan/tietkiem/xoa', [TietKiemController::class, 'xoaTietKiem']);
 //ngan sach
