@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class NganSach extends Model
+class Gia_Dinh extends Model
 {
-    protected $table = 'ngan_saches';
+    protected $table = 'gia__dinhs';
 
     protected $fillable = [
-        'ma_tai_khoan',
-        'ma_danh_muc',
-        'han_muc',
+        'ten_gia_dinh',
+        'mo_ta',
     ];
     public $timestamps = true;
 }

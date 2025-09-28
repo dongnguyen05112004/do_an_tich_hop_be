@@ -22,8 +22,7 @@ class tietkiemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ma_tiet_kiem' => 'required|string|max:255',
-            'ma_tai_khoan' => 'required|string|max:255',
+            'ten_tiet_kiem' => 'required|string|max:255',
             'ngay_bat_dau' => 'required|date',
             'ngay_ket_thuc' => 'required|date|after_or_equal:ngay_bat_dau',
             'lai_suat' => 'required|numeric|min:0|max:100',
@@ -33,8 +32,9 @@ class tietkiemRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'ma_tiet_kiem.required' => 'Mã tiết kiệm là bắt buộc.',
-            'ma_tai_khoan.required' => 'Mã tài khoản là bắt buộc.',
+            'ten_tiet_kiem.required' => 'Tên tiết kiệm là bắt buộc.',
+            'ten_tiet_kiem.string' => 'Tên tiết kiệm phải là một chuỗi ký tự.',
+            'ten_tiet_kiem.max' => 'Tên tiết kiệm không được vượt quá 255 ký tự.',
             'ngay_bat_dau.required' => 'Ngày bắt đầu là bắt buộc.',
             'ngay_ket_thuc.required' => 'Ngày kết thúc là bắt buộc.',
             'ngay_ket_thuc.after_or_equal' => 'Ngày kết thúc phải sau hoặc bằng ngày bắt đầu.',
