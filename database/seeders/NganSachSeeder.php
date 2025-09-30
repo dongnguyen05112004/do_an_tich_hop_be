@@ -17,21 +17,28 @@ class NganSachSeeder extends Seeder
             [
                 'ma_tai_khoan' => '1',
                 'ma_danh_muc' => '2',
+
+
                 'han_muc' => '50000',
+
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'ma_tai_khoan' => '1',
                 'ma_danh_muc' => '3',
+
                 'han_muc' => '30000',
+
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'ma_tai_khoan' => '2',
                 'ma_danh_muc' => '1',
+
                 'han_muc' => '70000',
+
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
