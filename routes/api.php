@@ -3,7 +3,9 @@
 use App\Http\Controllers\BaoCaoController;
 use App\Http\Controllers\chitieuController;
 use App\Http\Controllers\chitieugiadinhController;
-use App\Http\Controllers\DanhmucController;
+
+use App\Http\Controllers\DanhMucController;
+
 use App\Http\Controllers\NganSachController;
 use App\Http\Controllers\NganSachgiadinhController;
 use App\Http\Controllers\NoController;
@@ -35,34 +37,39 @@ Route::post('/canhan/no/them', [NoController::class, 'themNo']);
 Route::post('/canhan/no/sua', [NoController::class, 'suaNo']);
 Route::post('/canhan/no/xoa', [NoController::class, 'xoaNo']);
 //tiet kiem
-Route::get('/tietkiem/check-login' , [TietKiemController::class, 'checkLogin']);
-Route::get('/canhan/tietkiem/data', [TietKiemController::class, 'getdata']);
+Route::get('/tietkiem/check-login' , [TietKiemController::class, 'checkLogin'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::get('/canhan/tietkiem/data', [TietKiemController::class, 'getdata'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 Route::post('/canhan/tietkiem/them', [TietKiemController::class, 'themTietKiem'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
-Route::post('/canhan/tietkiem/sua', [TietKiemController::class, 'suaTietKiem']);
-Route::post('/canhan/tietkiem/xoa', [TietKiemController::class, 'xoaTietKiem']);
+Route::post('/canhan/tietkiem/sua', [TietKiemController::class, 'suaTietKiem'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/canhan/tietkiem/xoa', [TietKiemController::class, 'xoaTietKiem'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 //ngan sach
-Route::get('/canhan/ngansach/data', [NganSachController::class, 'getdata']);
-Route::post('/canhan/ngansach/them', [NganSachController::class, 'themNganSach']);
-Route::post('/canhan/ngansach/sua', [NganSachController::class, 'suaNganSach']);
-Route::post('/canhan/ngansach/xoa', [NganSachController::class, 'xoaNganSach']);
+Route::get('/canhan/ngansach/data', [NganSachController::class, 'getdata'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/canhan/ngansach/them', [NganSachController::class, 'themNganSach'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/canhan/ngansach/sua', [NganSachController::class, 'suaNganSach'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/canhan/ngansach/xoa', [NganSachController::class, 'xoaNganSach'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 // Khach hang
 Route::post('/khach-hang/dang-nhap', [TaiKhoanController::class, 'DangNhap']);
 Route::get('/khach-hang/get-data', [TaiKhoanController::class, 'getdata']);
 Route::post('/khach-hang/sua-profile', [TaiKhoanController::class, 'suaprofile']);
 Route::post('/khach-hang/doi-password', [TaiKhoanController::class, 'doipassword']);
 Route::post('/dang-ky', [TaiKhoanController::class, 'Dangky']);
+
 //danh muc
 Route::get('/danhmuc', [DanhmucController::class, 'getdanhmuc'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 Route::post('/themdanhmuc', [DanhmucController::class, 'themdanhmuc'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 Route::post('/suadanhmuc', [DanhmucController::class, 'suadanhmuc'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 Route::post('/xoadanhmuc', [DanhmucController::class, 'xoadanhmuc'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 
+// Danh muc
+Route::get('/canhan/danhmuc/data', [DanhMucController::class, 'getDanhMuc'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+
+
 
 //nhom gia dinh
 Route::get('/qlgiadinh', [QuanlynhomgiadinhController::class, 'qlgiadinh']);
 
 //baocao
-Route::get('/canhan/baocao', [BaoCaoController::class, 'getBaoCao']);
+Route::get('/canhan/baocao', [DanhMucController::class, 'getDanhMuc']);
 
 
 //gia dinh

@@ -17,35 +17,45 @@ class NganSachTongSeeder extends Seeder
             [
                 'ma_tai_khoan' => '1',
                 'ma_TVGD' => '1',
-                'so_tien' => 100000,
+
+                'so_tien' => 10000,
+
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'ma_tai_khoan' => '2',
                 'ma_TVGD' => '2',
-                'so_tien' => 200000,
+
+                'so_tien' => 20000,
+
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'ma_tai_khoan' => '3',
                 'ma_TVGD' => '3',
-                'so_tien' => 300000,
+
+                'so_tien' => 30000,
+
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'ma_tai_khoan' => '4',
                 'ma_TVGD' => '4',
-                'so_tien' => 400000,
+
+                'so_tien' => 40000,
+
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'ma_tai_khoan' => '5',
                 'ma_TVGD' => '5',
-                'so_tien' => 500000,
+
+                'so_tien' => 50000,
+
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
