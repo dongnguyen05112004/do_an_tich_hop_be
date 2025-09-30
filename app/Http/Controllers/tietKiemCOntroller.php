@@ -50,7 +50,6 @@ class TietKiemController extends Controller
     {
         $user = Auth::guard('sanctum')->user();
         tietkiem::create([
-            'ma_tiet_kiem' => $this->TaoMaTietKiem(),
             'ten_tiet_kiem' => $request->ten_tiet_kiem,
             'ma_tai_khoan' => $user->id,
             'ngay_bat_dau' => $request->ngay_bat_dau,

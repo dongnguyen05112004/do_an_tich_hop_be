@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('loai_g_d_s', function (Blueprint $table) {
-            $table->id();
-            $table->string('ten_loai_gd');
-            $table->timestamps();
+        Schema::table('danh_mucs', function (Blueprint $table) {
+            $table->unsignedBigInteger('ma_gia_dinh')->nullable()->change();
         });
     }
 
@@ -23,7 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loai_g_d_s');
+        Schema::table('danh_mucs', function (Blueprint $table) {
+            $table->unsignedBigInteger('ma_gia_dinh')->nullable(false)->change();
+        });
     }
-    
 };

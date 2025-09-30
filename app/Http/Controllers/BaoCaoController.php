@@ -10,49 +10,135 @@ class BaoCaoController extends Controller
 
     public function getBaoCao(Request $request)
     {
-        // SELECT tai_khoans.ten_nguoi_dung,thunhaps.danh_muc,chitieus.danh_muc,thunhaps.so_tien,chitieus.so_tien, SUM(thunhaps.so_tien) as tong_tien_thu ,SUM(chitieus.so_tien) as tong_tien_chi
-        // from thunhaps join tai_khoans on tai_khoans.id = thunhaps.id JOIN chitieus ON tai_khoans.id = chitieus.id
-        // GROUP BY tai_khoans.ten_nguoi_dung
-        $baoCao = DB::table('thunhaps')
-            ->join('tai_khoans', 'tai_khoans.id', '=', 'thunhaps.id')
-            ->join('chitieus', 'tai_khoans.id', '=', 'chitieus.id')
+        //         SELECT danh_mucs.ten_danh_muc,
+        //     loai_g_d_s.ten_loai_gd,
+        // 		giao__diches.so_tien,
+        //     danh_mucs.mo_ta
+        // FROM loai_g_d_s JOIN danh_mucs on loai_g_d_s.id = danh_mucs.ma_loai_GD join giao__diches on giao__diches.ma_danh_muc = danh_mucs.id
+
+
+
+        $day_begin = $request->input('day_begin');
+        $day_end   = $request->input('day_end');
+
+        $query = DB::table('giao__diches')
+            ->join('danh_mucs', 'giao__diches.ma_danh_muc', '=', 'danh_mucs.id')
+            ->join('loai_g_d_s', 'danh_mucs.ma_loai_GD', '=', 'loai_g_d_s.id');
+
+        // Nếu có chọn ngày thì lọc theo created_at
+        if ($day_begin && $day_end) {
+            $query->whereBetween('giao__diches.created_at', [$day_begin, $day_end]);
+        }
+
+        $baoCao = DB::table('giao__diches')
+            ->join('danh_mucs', 'giao__diches.ma_danh_muc', '=', 'danh_mucs.id')
+            ->join('loai_g_d_s', 'danh_mucs.ma_loai_GD', '=', 'loai_g_d_s.id')
             ->select(
-                'tai_khoans.ten_nguoi_dung',
-                'thunhaps.danh_muc as thu_nhap_danh_muc',
-                'chitieus.danh_muc as chi_tieu_danh_muc',
-                'thunhaps.so_tien as so_tien_thu',
-                'chitieus.so_tien as so_tien_chi',
-                DB::raw('SUM(thunhaps.so_tien) as tong_tien_thu'),
-                DB::raw('SUM(chitieus.so_tien) as tong_tien_chi')
+                'danh_mucs.ten_danh_muc',
+                'loai_g_d_s.ten_loai_gd',
+                'giao__diches.so_tien',
+                'danh_mucs.mo_ta'
             )
-            ->groupBy('tai_khoans.ten_nguoi_dung', 'thunhaps.danh_muc', 'chitieus.danh_muc',
-                'thunhaps.so_tien', 'chitieus.so_tien')
             ->get();
 
-        $list_ten = [];
-        $list_tien_thu = [];
-        $list_tien_chi = [];
-        $danh_muc_thu = [];
-        $danh_muc_chi = [];
-        foreach ($baoCao as $key => $value) {
-            array_push($list_ten, $value->ten_nguoi_dung);
-            array_push($list_tien_thu, $value->so_tien_thu );
-            array_push($list_tien_chi, $value->so_tien_chi );
-            array_push($danh_muc_thu, $value->thu_nhap_danh_muc);
-            array_push($danh_muc_chi, $value->chi_tieu_danh_muc);
-
-
-
+        // SELECT
+        //     SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Thu Nhập' THEN giao__diches.so_tien ELSE 0 END) AS tong_thu_nhap,
+        //     SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Chi Tiêu' THEN giao__diches.so_tien ELSE 0 END) AS tong_chi_tieu,
+        // 		SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Thu Nhập' THEN giao__diches.so_tien ELSE 0 END) -
+        //     SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Chi Tiêu' THEN giao__diches.so_tien ELSE 0 END) AS chenh_lech
+        // FROM loai_g_d_s
+        // JOIN danh_mucs
+        //     ON loai_g_d_s.id = danh_mucs.ma_loai_GD
+        // JOIN giao__diches
+        //     ON giao__diches.ma_danh_muc = danh_mucs.id;
+        $tongHop = DB::table('giao__diches')->join('danh_mucs', 'giao__diches.ma_danh_muc', '=', 'danh_mucs.id')->join('loai_g_d_s', 'danh_mucs.ma_loai_GD', '=', 'loai_g_d_s.id')->selectRaw(" SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Thu Nhập' THEN giao__diches.so_tien ELSE 0 END) AS tong_thu_nhap, SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Chi Tiêu' THEN giao__diches.so_tien ELSE 0 END) AS tong_chi_tieu, SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Thu Nhập' THEN giao__diches.so_tien ELSE 0 END) - SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Chi Tiêu' THEN giao__diches.so_tien ELSE 0 END) AS chenh_lech ")->first();
+        $list_danh_muc = [];
+        $list_loai = [];
+        $list_so_tien = [];
+        $list_mo_ta = [];
+        foreach ($baoCao as $value) {
+            $list_danh_muc[] = $value->ten_danh_muc;
+            $list_loai[] = $value->ten_loai_gd;
+            $list_so_tien[] = $value->so_tien;
+            $list_mo_ta[] = $value->mo_ta;
         }
-        $chenh_lech = array_sum($list_tien_thu) - array_sum($list_tien_chi);
         return response()->json([
-            'list_ten' => $list_ten,
-            'list_tien_thu_chi' => array_merge($list_tien_thu, $list_tien_chi),
-            'danh_muc_thu_chi' => array_merge($danh_muc_thu, $danh_muc_chi),
-            'tong_tien_thu' => array_sum($list_tien_thu),
-            'tong_tien_chi' => array_sum($list_tien_chi),
-            'chenh_lech' => $chenh_lech,
-        ]);
-
+            'danh_muc' => $list_danh_muc,
+            'loai_gd' => $list_loai,
+            'so_tien' => $list_so_tien,
+            'mo_ta' => $list_mo_ta,
+            'tong_tien_thu' => $tongHop->tong_thu_nhap,
+            'tong_tien_chi' => $tongHop->tong_chi_tieu,
+            'chenh_lech' => $tongHop->chenh_lech,]);
     }
+    public function getBaoCaogiadinh(Request $request)
+    {
+//         SELECT DISTINCT danh_mucs.ten_danh_muc, loai_g_d_s.id,
+//     loai_g_d_s.ten_loai_gd,
+//     danh_mucs.ma_loai_GD,
+//     danh_mucs.mo_ta,
+// 		tai_khoans.ten_tai_khoan
+// FROM loai_g_d_s JOIN danh_mucs on loai_g_d_s.id = danh_mucs.ma_loai_GD join giao__diches on giao__diches.ma_danh_muc = danh_mucs.id
+//  join thanh_vien_gia_dinhs on giao__diches.ma_TVGD = thanh_vien_gia_dinhs.id join tai_khoans on thanh_vien_gia_dinhs.ma_tai_khoan = tai_khoans.id
+
+        $day_begin = $request->input('day_begin');
+    $day_end   = $request->input('day_end');
+    $maTaiKhoan = $request->input('ma_tai_khoan'); // thêm tham số tài khoản
+
+    $query = DB::table('giao__diches')
+        ->join('danh_mucs', 'giao__diches.ma_danh_muc', '=', 'danh_mucs.id')
+        ->join('loai_g_d_s', 'danh_mucs.ma_loai_GD', '=', 'loai_g_d_s.id')
+        ->join('thanh_vien_gia_dinhs', 'giao__diches.ma_TVGD', '=', 'thanh_vien_gia_dinhs.id')
+        ->join('tai_khoans', 'thanh_vien_gia_dinhs.ma_tai_khoan', '=', 'tai_khoans.id');
+
+    // Lọc theo ngày
+    if ($day_begin && $day_end) {
+        $query->whereBetween('giao__diches.created_at', [$day_begin, $day_end]);
+    }
+
+    // Lọc theo tài khoản nếu có
+    if ($maTaiKhoan && $maTaiKhoan !== 'all') {
+        $query->where('tai_khoans.id', $maTaiKhoan);
+    }
+
+    $baoCao = $query->select(
+            'danh_mucs.ten_danh_muc',
+            'loai_g_d_s.ten_loai_gd',
+            'giao__diches.so_tien',
+            'danh_mucs.mo_ta',
+            'tai_khoans.ten_tai_khoan'
+        )
+        ->get();
+
+    // Tổng hợp
+    $tongHop = $query->selectRaw("
+            SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Thu Nhập' THEN giao__diches.so_tien ELSE 0 END) AS tong_thu_nhap,
+            SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Chi Tiêu' THEN giao__diches.so_tien ELSE 0 END) AS tong_chi_tieu,
+            SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Thu Nhập' THEN giao__diches.so_tien ELSE 0 END) -
+            SUM(CASE WHEN loai_g_d_s.ten_loai_gd = 'Chi Tiêu' THEN giao__diches.so_tien ELSE 0 END) AS chenh_lech
+        ")
+        ->first();
+
+    // Xuất dữ liệu ra FE
+    $list_danh_muc = [];
+    $list_loai = [];
+    $list_so_tien = [];
+    $list_mo_ta = [];
+    foreach ($baoCao as $value) {
+        $list_danh_muc[] = $value->ten_danh_muc;
+        $list_loai[] = $value->ten_loai_gd;
+        $list_so_tien[] = $value->so_tien;
+        $list_mo_ta[] = $value->mo_ta;
+    }
+
+    return response()->json([
+        'danh_muc'       => $list_danh_muc,
+        'loai_gd'        => $list_loai,
+        'so_tien'        => $list_so_tien,
+        'mo_ta'          => $list_mo_ta,
+        'tong_tien_thu'  => $tongHop->tong_thu_nhap ,
+        'tong_tien_chi'  => $tongHop->tong_chi_tieu ,
+        'chenh_lech'     => $tongHop->chenh_lech ,
+    ]);
+}
 }

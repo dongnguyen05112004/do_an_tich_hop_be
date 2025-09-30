@@ -3,10 +3,12 @@
 use App\Http\Controllers\BaoCaoController;
 use App\Http\Controllers\chitieuController;
 use App\Http\Controllers\chitieugiadinhController;
+use App\Http\Controllers\DanhmucController;
 use App\Http\Controllers\NganSachController;
 use App\Http\Controllers\NganSachgiadinhController;
 use App\Http\Controllers\NoController;
 use App\Http\Controllers\nogiadinhController;
+use App\Http\Controllers\QuanlynhomgiadinhController;
 use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\thunhapController;
 use App\Http\Controllers\thunhapgiadinhController;
@@ -49,7 +51,15 @@ Route::get('/khach-hang/get-data', [TaiKhoanController::class, 'getdata']);
 Route::post('/khach-hang/sua-profile', [TaiKhoanController::class, 'suaprofile']);
 Route::post('/khach-hang/doi-password', [TaiKhoanController::class, 'doipassword']);
 Route::post('/dang-ky', [TaiKhoanController::class, 'Dangky']);
+//danh muc
+Route::get('/danhmuc', [DanhmucController::class, 'getdanhmuc'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/themdanhmuc', [DanhmucController::class, 'themdanhmuc'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/suadanhmuc', [DanhmucController::class, 'suadanhmuc'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/xoadanhmuc', [DanhmucController::class, 'xoadanhmuc'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 
+
+//nhom gia dinh
+Route::get('/qlgiadinh', [QuanlynhomgiadinhController::class, 'qlgiadinh']);
 
 //baocao
 Route::get('/canhan/baocao', [BaoCaoController::class, 'getBaoCao']);
@@ -81,4 +91,6 @@ Route::get('/giadinh/ngansach/data', [NganSachgiadinhController::class, 'getdata
 Route::post('/giadinh/ngansach/them', [NganSachgiadinhController::class, 'themNganSach']);
 Route::post('/giadinh/ngansach/sua', [NganSachgiadinhController::class, 'suaNganSach']);
 Route::post('/giadinh/ngansach/xoa', [NganSachgiadinhController::class, 'xoaNganSach']);
+//baocaogiadinh
+Route::get('/giadinh/baocaogiadinh', [BaoCaoController::class, 'getBaoCaogiadinh']);
 

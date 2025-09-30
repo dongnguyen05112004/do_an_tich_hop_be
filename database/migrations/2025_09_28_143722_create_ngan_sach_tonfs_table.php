@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('ngan_sach_tonfs', function (Blueprint $table) {
             $table->id();
             $table->string('ma_tai_khoan');
-            $table->string('ma_TVGD');  
-            $table->decimal('so_tien');
+            $table->string('ma_TVGD');
+            $table->decimal('so_tien',15,2);
             $table->timestamps();
         });
     }
