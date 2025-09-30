@@ -9,6 +9,7 @@ use App\Models\tietkiem;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TietKiemController extends Controller
 {
@@ -30,29 +31,23 @@ class TietKiemController extends Controller
             ]);
         }
     }
-    private function TaoMaTietKiem()
-    {
-        $lastRecord = TietKiem::orderBy('id', 'desc')->first();
-        if (!$lastRecord) {
-            return 'TK0001';
-        }
-
-        $lastId = $lastRecord->id + 1;
-        return 'TK' . str_pad($lastId, 4, '0', STR_PAD_LEFT);
-    }
     public function getdata()
     {
-        $data = TietKiem::all();
+        $user = Auth::guard('sanctum')->user();
+        $data = TietKiem::where('ma_tai_khoan', $user->id)->get();
         return response()->json(['data' => $data]);
     }
 
     public function themTietKiem(tietkiemRequest $request)
     {
         $user = Auth::guard('sanctum')->user();
+        $ma_tvgd = DB::table('thanh_vien_gia_dinhs')
+        ->where('ma_tai_khoan', $user->id)
+        ->value('id');
         tietkiem::create([
-            'ma_tiet_kiem' => $this->TaoMaTietKiem(),
             'ten_tiet_kiem' => $request->ten_tiet_kiem,
             'ma_tai_khoan' => $user->id,
+            'ma_tvgd' => $ma_tvgd,
             'ngay_bat_dau' => $request->ngay_bat_dau,
             'ngay_ket_thuc' => $request->ngay_ket_thuc,
             'lai_suat' => $request->lai_suat,

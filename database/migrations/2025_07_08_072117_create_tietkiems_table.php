@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ten_tiet_kiem');
             $table->string('ma_tai_khoan');
             $table->string('ma_tvgd');
-            $table->decimal('so_tien_tiet_kiem');
+            $table->decimal('so_tien_tiet_kiem')->default(0);
             $table->string('ngang_hang');
             $table->date('ngay_bat_dau');
             $table->date('ngay_ket_thuc');
