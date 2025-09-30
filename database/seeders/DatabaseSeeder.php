@@ -24,5 +24,19 @@ class DatabaseSeeder extends Seeder
         $this->call(thunhapSeeder::class);
         $this->call(NoSeeder::class);
         $this->call(TaiKhoanSeeder::class);
+        $this->call(ThanhVienGiaDinhSeeder::class);
+        $this->call(DanhMucSeeder::class);
+        $this->call(NganSachSeeder::class);
+        $this->call(NganSachTongSeeder::class);
+        $this->call(GiaDinhSeeder::class);
+        $this->call(LoaiGDSeeder::class);
+        $this->call(GiaoDichSeeder::class);
+        $this->call(nogiadinhSeeder::class);
+        $this->call(NganSachgiadinhSeeder::class);
+        $this->call(HinhThucVayNoSeeder::class);
+        $this->call(QuyenSeeder::class);
+        $this->call(thunhapgiadinhSeeder::class);
+        $this->call(chitieugiadinhSeeder::class);
+        $this->call(tietkiemgiadinhSeeder::class);
     }
 }
