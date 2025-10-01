@@ -9,6 +9,7 @@ class chitieu extends Model
     protected $table = 'chitieus';
 
     protected $fillable = [
+        'id_tai_khoan',
         'ma_chi',
         'ten_chi_tieu',
         'danh_muc',

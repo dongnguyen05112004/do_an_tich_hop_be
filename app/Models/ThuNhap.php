@@ -9,6 +9,7 @@ class ThuNhap extends Model
     protected $table = 'thunhaps';
 
     protected $fillable = [
+        'id_tai_khoan',
         'ma_thu',
         'ten_thu_nhap',
         'danh_muc',

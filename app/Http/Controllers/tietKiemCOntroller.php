@@ -16,7 +16,7 @@ class TietKiemController extends Controller
     public function checkLogin(LoginRequests $request)
     {
         $check = TaiKhoan::where('email', $request->email)
-            ->where('password', $request->password)
+            ->where('mat-khau', $request->password)
             ->first();
         if ($check) {
             return response()->json([
@@ -31,6 +31,18 @@ class TietKiemController extends Controller
             ]);
         }
     }
+
+    private function TaoMaTietKiem()
+    {
+        $lastRecord = TietKiem::orderBy('id', 'desc')->first();
+        if (!$lastRecord) {
+            return 'TK0001';
+        }
+
+        $lastId = $lastRecord->id + 1;
+        return 'TK' . str_pad($lastId, 4, '0', STR_PAD_LEFT);
+    }
+
     public function getdata()
     {
         $user = Auth::guard('sanctum')->user();

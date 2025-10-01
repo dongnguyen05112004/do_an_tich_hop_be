@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('ma_tai_khoan');
             $table->string('ma_TVGD');
-            $table->decimal('so_tien',15,2);
+            $table->decimal('so_tien'); 
             $table->timestamps();
         });
     }

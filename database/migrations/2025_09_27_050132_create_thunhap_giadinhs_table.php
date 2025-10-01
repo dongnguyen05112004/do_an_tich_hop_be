@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('thunhap_giadinhs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_tai_khoan')
+                ->constrained('tai_khoans')
+                ->onDelete('cascade');
+            $table->string('ma_thu_gd')->unique();
+            $table->string('ten_thu_nhap_gd');
+            $table->string('danh_muc_gd');
+            $table->string('so_tien_gd');
+            $table->date('ngay_gd');
+            $table->text('mo_ta_gd')->nullable();
             $table->timestamps();
         });
     }

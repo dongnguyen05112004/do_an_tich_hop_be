@@ -17,7 +17,7 @@ class TaiKhoanSeeder extends Seeder
                 'ten_nguoi_dung' => 'Admin',
                 'sdt' => '0123456789',
                 'email' => 'NguyenVanA@gmail.com',
-                'avatar' => '',
+                'avatar' => 'https://samyangvietnam.com/wp-content/uploads/2024/01/can-nang-cua-meo-con-01.jpg',
             ],
             [
                 'ten_tai_khoan' => 'TranVanB',
@@ -25,7 +25,7 @@ class TaiKhoanSeeder extends Seeder
                 'ten_nguoi_dung' => 'User B',
                 'sdt' => '0987654321',
                 'email' => 'TranVanB@gmail.com',
-                'avatar' => '',
+                'avatar' => 'https://samyangvietnam.com/wp-content/uploads/2024/01/can-nang-cua-meo-con-01.jpg',
             ],
             [
                 'ten_tai_khoan' => 'NguyenVanC',
@@ -33,7 +33,7 @@ class TaiKhoanSeeder extends Seeder
                 'ten_nguoi_dung' => 'User C',
                 'sdt' => '0905484848',
                 'email' => 'NguyenVanC@gmail.com',
-                'avatar' => '',
+                'avatar' => 'https://samyangvietnam.com/wp-content/uploads/2024/01/can-nang-cua-meo-con-01.jpg',
             ],
             [
                 'ten_tai_khoan' => 'NguyenVanD',
@@ -41,7 +41,7 @@ class TaiKhoanSeeder extends Seeder
                 'ten_nguoi_dung' => 'User D',
                 'sdt' => '0123456789',
                 'email' => 'NguyenVanD@gmail.com',
-                'avatar' => '',
+                'avatar' => 'https://samyangvietnam.com/wp-content/uploads/2024/01/can-nang-cua-meo-con-01.jpg',
             ],
         ]);
     }

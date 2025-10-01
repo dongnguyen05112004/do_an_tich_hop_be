@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('chitieus', function (Blueprint $table) {
-             $table->id();
+            $table->id();
+            $table->foreignId('id_tai_khoan')
+                ->constrained('tai_khoans')
+                ->onDelete('cascade');
             $table->string('ma_chi')->unique();
             $table->string('ten_chi_tieu');
             $table->string('danh_muc')->nullable();
