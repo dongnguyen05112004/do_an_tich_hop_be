@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('thunhaps', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_tai_khoan')
+                ->constrained('tai_khoans')
+                ->onDelete('cascade');
             $table->string('ma_thu')->unique();
             $table->string('ten_thu_nhap');
             $table->string('danh_muc')->nullable();

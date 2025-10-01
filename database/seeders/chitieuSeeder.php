@@ -18,6 +18,7 @@ class chitieuSeeder extends Seeder
         DB::table('chitieus')->truncate();
         DB::table('chitieus')->insert([
             [
+                'id_tai_khoan' => 1,
                 'ma_chi' => 'CT001',
                 'ten_chi_tieu' => 'Chi tiêu tháng 1',
                 'danh_muc' => 'Nhà',
@@ -25,6 +26,7 @@ class chitieuSeeder extends Seeder
                 'ngay' => '2025-01-31',
                 'mo_ta' => 'Tiền nhà tháng 1 năm 2025'
             ], [
+                'id_tai_khoan' => 1,
                 'ma_chi' => 'CT002',
                 'ten_chi_tieu' => 'Chi tiêu tháng 1',
                 'danh_muc' => 'Ô tô',
@@ -33,6 +35,7 @@ class chitieuSeeder extends Seeder
                 'mo_ta' => 'Tiền Ô tô tháng 1 năm 2025'
             ],
             [
+                'id_tai_khoan' => 1,
                 'ma_chi' => 'CT003',
                 'ten_chi_tieu' => 'Chi tiêu tháng 1',
                 'danh_muc' => 'Đồ dùng',
@@ -41,6 +44,7 @@ class chitieuSeeder extends Seeder
                 'mo_ta' => 'Đồ dùng tháng 1 năm 2025'
             ],
             [
+                'id_tai_khoan' => 1,
                 'ma_chi' => 'CT004',
                 'ten_chi_tieu' => 'Chi tiêu tháng 1',
                 'danh_muc' => 'Đồ ăn',
@@ -48,8 +52,6 @@ class chitieuSeeder extends Seeder
                 'ngay' => '2025-02-28',
                 'mo_ta' => 'Tiền đồ ăn tháng 1 năm 2025'
             ],
-            
-
 
         ]);
     }

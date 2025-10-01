@@ -22,15 +22,15 @@ use Illuminate\Support\Facades\Route;
 //ca nhan
 
 //thu nhap
-Route::get('/canhan/thunhap/data', [thunhapController::class, 'getThuNhap']);
-Route::post('/canhan/thunhap/them', [thunhapController::class, 'themThuNhap']);
-Route::post('/canhan/thunhap/sua', [thunhapController::class, 'suaThuNhap']);
-Route::post('/canhan/thunhap/xoa', [thunhapController::class, 'xoaThuNhap']);
+Route::get('/canhan/thunhap/data', [thunhapController::class, 'getThuNhap'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/canhan/thunhap/them', [thunhapController::class, 'themThuNhap'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/canhan/thunhap/sua', [thunhapController::class, 'suaThuNhap'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/canhan/thunhap/xoa', [thunhapController::class, 'xoaThuNhap'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 //chi tieu
-Route::get('/canhan/chitieu/data', [chitieuController::class, 'getChiTieu']);
-Route::post('/canhan/chitieu/them', [chitieuController::class, 'themChiTieu']);
-Route::post('/canhan/chitieu/sua', [chitieuController::class, 'suaChiTieu']);
-Route::post('/canhan/chitieu/xoa', [chitieuController::class, 'xoaChiTieu']);
+Route::get('/canhan/chitieu/data', [chitieuController::class, 'getChiTieu'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/canhan/chitieu/them', [chitieuController::class, 'themChiTieu'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/canhan/chitieu/sua', [chitieuController::class, 'suaChiTieu'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/canhan/chitieu/xoa', [chitieuController::class, 'xoaChiTieu'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
 //no
 Route::get('/canhan/no/data', [NoController::class, 'getNo']);
 Route::post('/canhan/no/them', [NoController::class, 'themNo']);
@@ -74,15 +74,17 @@ Route::get('/canhan/baocao', [DanhMucController::class, 'getDanhMuc']);
 
 //gia dinh
 //thu nhap
-Route::get('/giadinh/thunhap/data', [thunhapgiadinhController::class, 'getThuNhap']);
-Route::post('/giadinh/thunhap/them', [thunhapgiadinhController::class, 'themThuNhap']);
-Route::post('/giadinh/thunhap/sua', [thunhapgiadinhController::class, 'suaThuNhap']);
-Route::post('/giadinh/thunhap/xoa', [thunhapgiadinhController::class, 'xoaThuNhap']);
+Route::get('/giadinh/thunhap/data', [thunhapgiadinhController::class, 'getThuNhap'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/giadinh/thunhap/them', [thunhapgiadinhController::class, 'themThuNhap'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/giadinh/thunhap/sua', [thunhapgiadinhController::class, 'suaThuNhap'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/giadinh/thunhap/xoa', [thunhapgiadinhController::class, 'xoaThuNhap'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+
 //chi tieu
-Route::get('/giadinh/chitieu/data', [chitieugiadinhController::class, 'getChiTieu']);
-Route::post('/giadinh/chitieu/them', [chitieugiadinhController::class, 'themChiTieu']);
-Route::post('/giadinh/chitieu/sua', [chitieugiadinhController::class, 'suaChiTieu']);
-Route::post('/giadinh/chitieu/xoa', [chitieugiadinhController::class, 'xoaChiTieu']);
+Route::get('/giadinh/chitieu/data', [chitieugiadinhController::class, 'getChiTieu'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/giadinh/chitieu/them', [chitieugiadinhController::class, 'themChiTieu'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/giadinh/chitieu/sua', [chitieugiadinhController::class, 'suaChiTieu'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+Route::post('/giadinh/chitieu/xoa', [chitieugiadinhController::class, 'xoaChiTieu'])->middleware('\App\Http\Middleware\KiemTraMiddleware');
+
 //no
 Route::get('/giadinh/no/data', [nogiadinhController::class, 'getNo']);
 Route::post('/giadinh/no/them', [nogiadinhController::class, 'themNo']);

@@ -18,6 +18,7 @@ class thunhapSeeder extends Seeder
         DB::table('thunhaps')->truncate();
         DB::table('thunhaps')->insert([
             [
+                'id_tai_khoan' => 1,
                 'ma_thu' => 'TH001',
                 'ten_thu_nhap' => 'Lương tháng 1',
                 'danh_muc' => 'Lương',
@@ -26,6 +27,7 @@ class thunhapSeeder extends Seeder
                 'mo_ta' => 'Lương tháng 1 năm 2025'
             ],
             [
+                'id_tai_khoan' => 1,
                 'ma_thu' => 'TH002',
                 'ten_thu_nhap' => 'Lương tháng 2',
                 'danh_muc' => 'Lương',
@@ -34,6 +36,7 @@ class thunhapSeeder extends Seeder
                 'mo_ta' => 'Lương tháng 2 năm 2025'
             ],
             [
+                'id_tai_khoan' => 1,
                 'ma_thu' => 'TH003',
                 'ten_thu_nhap' => 'Tiền thưởng',
                 'danh_muc' => 'Thưởng',
@@ -42,6 +45,7 @@ class thunhapSeeder extends Seeder
                 'mo_ta' => 'Tiền thưởng quý 1 năm 2025'
             ],
             [
+                'id_tai_khoan' => 1,
                 'ma_thu' => 'TH004',
                 'ten_thu_nhap' => 'Lương tháng 3',
                 'danh_muc' => 'Lương',
@@ -50,6 +54,7 @@ class thunhapSeeder extends Seeder
                 'mo_ta' => 'Lương tháng 3 năm 2025'
             ],
             [
+                'id_tai_khoan' => 1,
                 'ma_thu' => 'TH005',
                 'ten_thu_nhap' => 'Tiền lãi từ đầu tư',
                 'danh_muc' => 'Đầu tư',

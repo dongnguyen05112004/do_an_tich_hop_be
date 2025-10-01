@@ -11,6 +11,23 @@ use Illuminate\Support\Facades\Auth;
 
 class TaiKhoanController extends Controller
 {
+    public function checkToken()
+    {
+        $user_login = Auth::guard('sanctum')->user();
+        if ($user_login) {
+            return response()->json([
+                'status'    => 1,
+                'ten_tai_khoan'=> $user_login->ho_va_ten,
+                'avatar'    => $user_login->avatar,
+            ]);
+        } else {
+            return response()->json([
+                'status'    => 0,
+                'message'   => 'Bạn cần đăng nhập hệ thống!'
+            ]);
+        }
+    }
+
     public function DangNhap(Request $request)
     {
         $TaiKhoan = TaiKhoan::where('email', $request->email)
@@ -29,6 +46,7 @@ class TaiKhoanController extends Controller
             ]);
         }
     }
+    
     public function getdata()
     {
         $user = Auth::guard('sanctum')->user();
