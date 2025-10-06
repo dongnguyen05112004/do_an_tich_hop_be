@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('so_tien');
             $table->string('ngay_giao_dich');
             $table->string('ghi_chu')->nullable();
-            $table->string('ma_TVGD');
+            $table->string('ma_TVGD')->nullable();
             $table->timestamps();
         });
     }
