@@ -13,6 +13,8 @@ class DanhMucSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('danh_mucs')->delete();
+        DB::table('danh_mucs')->truncate();
         DB::table('danh_mucs')->insert([
             [
                 'ten_danh_muc' => 'Lương',
@@ -23,21 +25,35 @@ class DanhMucSeeder extends Seeder
             ],
             [
                 'ten_danh_muc' => 'Thưởng',
-                'ma_tai_khoan' => '2',
+                'ma_tai_khoan' => '1',
                 'ma_gia_dinh' => '1',
                 'mo_ta' => 'Tiền thưởng từ công ty',
+                'ma_loai_GD' => '2',
+            ],
+            [
+                'ten_danh_muc' => 'Chứng khoán',
+                'ma_tai_khoan' => '1',
+                'ma_gia_dinh' => '1',
+                'mo_ta' => 'Thu nhập khác',
+                'ma_loai_GD' => '2',
+            ],
+            [
+                'ten_danh_muc' => 'Nhà cửa',
+                'ma_tai_khoan' => '1',
+                'ma_gia_dinh' => '1',
+                'mo_ta' => 'Chi phí thuê nhà hàng tháng',
                 'ma_loai_GD' => '1',
             ],
             [
                 'ten_danh_muc' => 'Ăn uống',
-                'ma_tai_khoan' => '4',
+                'ma_tai_khoan' => '1',
                 'ma_gia_dinh' => '1',
                 'mo_ta' => 'Chi phí ăn uống hàng ngày',
-                'ma_loai_GD' => '2',
+                'ma_loai_GD' => '1',
             ],
             [
                 'ten_danh_muc' => 'Giải trí',
-                'ma_tai_khoan' => '3',
+                'ma_tai_khoan' => '1',
                 'ma_gia_dinh' => '1',
                 'mo_ta' => 'Chi phí cho các hoạt động giải trí',
                 'ma_loai_GD' => '1',
